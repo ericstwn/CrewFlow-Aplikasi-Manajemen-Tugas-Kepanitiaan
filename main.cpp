@@ -9,6 +9,7 @@ int main() {
     cout << "Hasil penjumlahan: " << a + b;
     cout << "\nHasil pengurangan: " << a - b;
     cout << "\nHasil perkalian: " << a * b;
+    cout <<  "\nHasil perkalian: " << a * b;
     cout << "\nHasil pembagian: " << a / b<< endl;
     return 0;
 }
