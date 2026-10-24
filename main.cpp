@@ -29,17 +29,23 @@ int main() {
     }
     else if (menu == 2)
     {
-        cout << "======= Daftar =======";
+        cout << "======= Daftar =======\n";
+        cout << "Buat Username: ";
+        cin >> username;
+        cout << "Buat Password: ";
+        cin >> password;
         
     }
-    else if (menu == 3);
+    else if (menu == 3)
     {
         cout << "\nTerima Kasih Udah Pakai CrewFlow ;)\n";
     }
     else 
     {
-        cout ""
+        cout << "Pilihan Tidak Valid!";
     }
+    cout << endl;
+    return 0;
 }
 
 
