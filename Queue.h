@@ -5,7 +5,7 @@
 #define QUEUE_H
 
 #include "data.h"
-#include "tugas.h"
+#include "Tugas.h"
 
 class AntreanTugas {
 private:

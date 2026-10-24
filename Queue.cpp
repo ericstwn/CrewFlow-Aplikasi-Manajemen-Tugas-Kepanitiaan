@@ -1,7 +1,7 @@
 // ============================================================
 // Queue.cpp  -  Implementasi Queue Antrean Tugas  (AQILAH)
 // ============================================================
-#include "queue.h"
+#include "Queue.h"
 
 AntreanTugas::AntreanTugas() : front(nullptr), rear(nullptr), ukuran(0) {}
 
