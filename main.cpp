@@ -4,6 +4,7 @@ using namespace std;
 
 int main() {
     int menu;
+    string username, password;
 
     cout << "------------------------\n";
     cout << "       CREWFLOW\n";
@@ -14,6 +15,21 @@ int main() {
     cout << "========================\n";
     cout << "Pilih Menu: ";
     cin >> menu;
+
+    if (menu == 1)
+    {
+        cout << "-----------------------\n";
+        cout << "        LOGIN\n";
+        cout << "-----------------------\n";
+        cout << "Username: ";
+        cin >> username;
+        cout << "Password: ";
+        cin >> password;
+    }
+    else if (menu == 2)
+    {
+        cout << "======= Daftar ======="
+    }
 }
 
 
