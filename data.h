@@ -97,7 +97,19 @@ struct Stack {
     NodeStack* top;
     int jumlah;
 };
+// ---- Riwayat aksi (dipakai riwayat.h / riwayat.cpp) ----
+enum JenisAksi { AKSI_TAMBAH, AKSI_EDIT, AKSI_HAPUS };
 
+struct Aksi {
+    JenisAksi jenis;
+    Tugas sebelum;     // kondisi tugas SEBELUM aksi (EDIT & HAPUS)
+    Tugas sesudah;     // kondisi tugas SESUDAH aksi (TAMBAH & EDIT)
+};
+
+struct NodeRiwayat {
+    Aksi data;
+    NodeRiwayat* next;
+};
 // ================================================================
 //  SHAFIRA : Binary Search Tree (Searching)
 //  File    : Searching.h, Searching.cpp, Sorting.h, Sorting.cpp
