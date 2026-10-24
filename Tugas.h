@@ -4,8 +4,8 @@
 #ifndef TUGAS_H
 #define TUGAS_H
 
-#include "Data.h"
-#include "Anggota.h"
+#include "data.h"
+#include "anggota.h"
 
 class DaftarTugas {
 private:
