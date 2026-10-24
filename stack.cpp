@@ -8,20 +8,20 @@ void createStack(Stack &S) {
     S.jumlah = 0;
 }
 
-bool isEmptyStack(const Stack &S) {
+bool isEmpty(const Stack &S) {
     return S.top == nullptr;
 }
 
 void push(Stack &S, const Tugas &t) {
     NodeStack* baru = new NodeStack;
     baru->data = t;
-    baru->next = S.top;  
-    S.top = baru;        
+    baru->next = S.top;   // node baru menunjuk ke top lama
+    S.top = baru;         // top pindah ke node baru
     S.jumlah++;
 }
 
 bool pop(Stack &S, Tugas &hasil) {
-    if (isEmptyStack(S)) return false;
+    if (isEmpty(S)) return false;
 
     NodeStack* hapus = S.top;
     hasil = hapus->data;
@@ -32,7 +32,7 @@ bool pop(Stack &S, Tugas &hasil) {
 }
 
 bool peek(const Stack &S, Tugas &hasil) {
-    if (isEmptyStack(S)) return false;
+    if (isEmpty(S)) return false;
     hasil = S.top->data;
     return true;
 }
@@ -41,8 +41,20 @@ int jumlahStack(const Stack &S) {
     return S.jumlah;
 }
 
+// UNDO: ambil tugas terakhir yang dihapus dari Recycle Bin.
+// Memasukkannya kembali ke daftar tugas (DLL) dilakukan di main.cpp
+// memakai fungsi tambah tugas milik Aqilah.
+bool undoHapus(Stack &S, Tugas &hasil) {
+    if (!pop(S, hasil)) {
+        cout << "Tidak ada tugas yang bisa dipulihkan.\n";
+        return false;
+    }
+    cout << "Tugas \"" << hasil.nama << "\" berhasil dipulihkan.\n";
+    return true;
+}
+
 void tampilkanRecycleBin(const Stack &S) {
-    if (isEmptyStack(S)) {
+    if (isEmpty(S)) {
         cout << "\nRecycle Bin kosong.\n";
         return;
     }
@@ -75,11 +87,11 @@ void tampilkanRecycleBin(const Stack &S) {
 
 bool hapusPermanenTeratas(Stack &S) {
     Tugas dummy;
-    return pop(S, dummy);   
+    return pop(S, dummy);   // pop lalu datanya dibuang
 }
 
 void kosongkanStack(Stack &S) {
-    while (!isEmptyStack(S)) {
+    while (!isEmpty(S)) {
         NodeStack* hapus = S.top;
         S.top = hapus->next;
         delete hapus;
