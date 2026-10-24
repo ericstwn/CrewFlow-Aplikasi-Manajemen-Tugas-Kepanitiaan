@@ -88,16 +88,24 @@ struct Queue {
 //  RAFI : Stack (Recycle Bin & Undo)
 //  File : Stack.h, Stack.cpp
 // ================================================================
-struct NodeStack {
-    Tugas data;
-    NodeStack* next;
-};
+ enum JenisAksi { AKSI_TAMBAH, AKSI_EDIT, AKSI_HAPUS };
 
-struct Stack {
-    NodeStack* top;
-    int jumlah;
-};
+   struct Aksi {
+       JenisAksi jenis;
+       Tugas sebelum;
+       Tugas sesudah;
+   };
 
+   struct NodeStack {
+       Aksi data;
+       NodeStack* next;
+   };
+
+   struct Stack {
+       NodeStack* top;
+       int jumlah;
+   };
+   
 // ================================================================
 //  SHAFIRA : Binary Search Tree (Searching)
 //  File    : Searching.h, Searching.cpp, Sorting.h, Sorting.cpp
