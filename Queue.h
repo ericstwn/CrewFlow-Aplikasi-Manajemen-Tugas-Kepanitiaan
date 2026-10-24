@@ -4,7 +4,7 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "Data.h"
+#include "data.h"
 #include "Tugas.h"
 
 class AntreanTugas {
