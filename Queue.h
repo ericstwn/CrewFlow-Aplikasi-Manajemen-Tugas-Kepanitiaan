@@ -4,8 +4,8 @@
 #ifndef QUEUE_H
 #define QUEUE_H
 
-#include "Data.h"
-#include "Tugas.h"
+#include "data.h"
+#include "tugas.h"
 
 class AntreanTugas {
 private:
