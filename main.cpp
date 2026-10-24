@@ -25,10 +25,20 @@ int main() {
         cin >> username;
         cout << "Password: ";
         cin >> password;
+        cout << "\nLogin Berhasil!\n";
     }
     else if (menu == 2)
     {
-        cout << "======= Daftar ======="
+        cout << "======= Daftar =======";
+        
+    }
+    else if (menu == 3);
+    {
+        cout << "\nTerima Kasih Udah Pakai CrewFlow ;)\n";
+    }
+    else 
+    {
+        cout ""
     }
 }
 
