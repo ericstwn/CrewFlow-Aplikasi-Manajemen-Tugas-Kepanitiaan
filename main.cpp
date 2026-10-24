@@ -3,24 +3,17 @@
 using namespace std;
 
 int main() {
-    string username;
-    string password;
+    int menu;
 
-	cout << "\n===============\n";
-    cout << "     LOGIN\n";
-    cout << "===============\n";
-    cout << "Username : ";
-    cin >> username;
-    cout << "Password : ";
-    cin >> password;
-
-    if (username == "Admin" && password == "1234") {
-        cout << "Login berhasil!";
-    } else {
-        cout << "Login gagal\n";
-        cout << "Username atau Password Salah!";
-    }
-    return 0;
+    cout << "------------------------\n";
+    cout << "       CREWFLOW\n";
+    cout << "------------------------\n";
+    cout << "1. Login\n";
+    cout << "2. Daftar\n";
+    cout << "3. Exit\n";
+    cout << "========================\n";
+    cout << "Pilih Menu: ";
+    cin >> menu;
 }
 
 
