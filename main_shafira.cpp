@@ -2,7 +2,7 @@
 #include "common.h"
 #include "utils.h"
 #include "anggota.h"
-#include "tugas.h"
+#include "Tugas.h"
 #include "riwayat.h"
 #include "search_sort.h"
 using namespace std;
