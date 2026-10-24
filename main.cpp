@@ -38,7 +38,7 @@ int main() {
     }
     else if (menu == 3)
     {
-        cout << "\nTerima Kasih Udah Pakai CrewFlow ;)\n";
+        cout << "Terima Kasih Udah Pakai CrewFlow ;)";
     }
     else 
     {
