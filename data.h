@@ -7,8 +7,11 @@
 //  2. File ini TIDAK memakai "using namespace std", jadi memakai std::string.
 //     Di file .cpp masing-masing boleh menulis "using namespace std;".
 //  3. Jangan ubah nama struct / field tanpa kabar ke seluruh anggota.
-//  4. Nama fungsi diberi akhiran modul agar tidak bentrok, contoh:
-//     isEmptyStack, isEmptyQueue, tampilkanTugas, tampilkanAnggota.
+//  4. Nama fungsi tidak boleh bentrok antar modul. Fungsi bernama sama
+//     boleh ada selama tipe parameternya berbeda, contoh:
+//     isEmpty(const Stack&) dan isEmpty(const Queue&).
+//     Kalau parameternya sama, beri akhiran modul, contoh:
+//     tampilkanTugas, tampilkanAnggota.
 // ================================================================
 
 #ifndef DATA_H
@@ -87,10 +90,9 @@ struct Queue {
 
 // ================================================================
 //  RAFI : Stack (Recycle Bin & Undo)
-//  File : Stack.h, Stack.cpp
+//  File : stack.h, stack.cpp
 // ================================================================
 enum JenisAksi { AKSI_TAMBAH, AKSI_EDIT, AKSI_HAPUS };
-
     struct Aksi {
     JenisAksi jenis;
     Tugas sebelum;
