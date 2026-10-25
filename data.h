@@ -1,6 +1,3 @@
-#ifndef DATA_H
-#define DATA_H
-
 // ================================================================
 //  Data.h  -  SATU-SATUNYA tempat definisi semua struct kelompok
 //  Proyek : Sistem Manajemen Tugas Kepanitiaan
@@ -17,31 +14,40 @@
 //     tampilkanTugas, tampilkanAnggota.
 // ================================================================
 
+#ifndef DATA_H
+#define DATA_H
+#include <iostream>
 #include <string>
+using namespace std;
 
-// ---------------- Konstanta bersama ----------------
+
 // Status tugas
-const std::string STATUS_DONE        = "Done";
-const std::string STATUS_IN_PROGRESS = "In Progress";
-const std::string STATUS_PENDING     = "Pending";
+const string STATUS_DONE        = "Done";
+const string STATUS_IN_PROGRESS = "In Progress";
+const string STATUS_PENDING     = "Pending";
 
 // Prioritas tugas
 const int PRIORITAS_TINGGI = 1;
 const int PRIORITAS_SEDANG = 2;
 const int PRIORITAS_RENDAH = 3;
 
+    struct Akun {
+        string username;
+        string password;
+    };
+
 // ================================================================
 //  DATA UTAMA : Tugas
 // ================================================================
 struct Tugas {
     int id;
-    std::string nama;
-    std::string penanggungJawab;
-    std::string divisi;
-    std::string deadline;      // format: DD-MM-YYYY
+    string nama;
+    string penanggungJawab;
+    string divisi;
+    string deadline;      // format: DD-MM-YYYY
     int prioritas;             // 1 = Tinggi, 2 = Sedang, 3 = Rendah
-    std::string deskripsi;
-    std::string status;        // "Done" / "In Progress" / "Pending"
+    string deskripsi;
+    string status;        // "Done" / "In Progress" / "Pending"
 };
 
 // ================================================================
@@ -49,13 +55,13 @@ struct Tugas {
 //  File : Anggota.h, Anggota.cpp
 // ================================================================
 struct Anggota {
-    std::string nama;
-    std::string nim;
+    string nama;
+    string nim;
     Anggota* next;
 };
 
 struct Divisi {
-    std::string namaDivisi;
+    string namaDivisi;
     Anggota* firstAnggota;     // child: daftar anggota divisi ini
     Divisi* next;              // parent: divisi berikutnya
 };
@@ -91,31 +97,30 @@ struct Queue {
 //  RAFI : Stack (Recycle Bin & Undo)
 //  File : stack.h, stack.cpp
 // ================================================================
- enum JenisAksi { AKSI_TAMBAH, AKSI_EDIT, AKSI_HAPUS };
+enum JenisAksi { AKSI_TAMBAH, AKSI_EDIT, AKSI_HAPUS };
+    struct Aksi {
+    JenisAksi jenis;
+    Tugas sebelum;
+    Tugas sesudah;
+};
 
-   struct Aksi {
-       JenisAksi jenis;
-       Tugas sebelum;     // kondisi tugas sebelum aksi
-       Tugas sesudah;     // kondisi tugas sesudah aksi
-   };
+    struct NodeStack {
+    Aksi data;
+    NodeStack* next;
+};
 
-   struct NodeStack {
-       Aksi data;
-       NodeStack* next;
-   };
+struct Stack {
+    NodeStack* top;
+    int jumlah;
+};
 
-   struct Stack {
-       NodeStack* top;
-       int jumlah;
-   };
-   
 // ================================================================
 //  SHAFIRA : Binary Search Tree (Searching)
 //  File    : Searching.h, Searching.cpp, Sorting.h, Sorting.cpp
 // ================================================================
 struct NodeBST {
     int id;                    // kunci pencarian berdasarkan ID
-    std::string nama;          // kunci pencarian berdasarkan nama
+    string nama;          // kunci pencarian berdasarkan nama
     NodeTugas* ptrTugas;       // menunjuk ke node tugas di DLL
     NodeBST* left;
     NodeBST* right;
