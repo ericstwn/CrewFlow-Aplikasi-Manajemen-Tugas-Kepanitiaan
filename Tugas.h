@@ -4,34 +4,31 @@
 #ifndef TUGAS_H
 #define TUGAS_H
 
+#include <string>
 #include "data.h"
-#include "anggota.h"
 
-class DaftarTugas {
-private:
-    Tugas* head;
-    int nextId;
+//inisialisasi & pengecekan
+void initListTugas(ListTugas &list);
+bool isEmptyTugas(const ListTugas &list);
 
-public:
-    DaftarTugas();
-    ~DaftarTugas();
-
-    int     tambah(const string& judul, int idPJ, const string& deadline, int prioritas);
-    void    tampil(const DaftarAnggota& anggota) const;
-    Tugas*  cariId(int id) const;
-    bool    ubah(int id, const string& judul, int idPJ, const string& deadline,
-                 int prioritas, int status);
-    bool    hapus(int id, Tugas& salinan);        // salinan dikirim ke Stack (undo)
-    void    pulihkan(const Tugas& t);             // dipakai Undo (timpa / sisip kembali)
-    int     jumlah() const;
-    bool    kosong() const;
-
-    Tugas*  getHead() const { return head; }
-    Tugas*& headRef()       { return head; }      // dipakai Sorting
-};
-
-// Tampilan baris tugas (juga dipakai Searching & Queue)
-void tampilHeaderTugas();
-void tampilBarisTugas(const Tugas* t, const DaftarAnggota& anggota);
-
+// ----- ID otomatis (1, 2, 3, ...) -----
+int  buatIdTugas();
+ 
+// ----- CRUD -----
+void       tambahTugas(ListTugas &list, const Tugas &data);          // sisip di belakang (tail)
+NodeTugas* cariTugasById(const ListTugas &list, int id);             // nullptr jika tidak ada
+bool       editTugas(ListTugas &list, int id, const Tugas &dataBaru);// id tidak berubah
+bool       hapusTugas(ListTugas &list, int id, Tugas &dataDihapus);  // dataDihapus -> dikirim ke Stack
+void       hapusSemuaTugas(ListTugas &list);
+ 
+// ----- Tampilan -----
+void tampilkanTugas(const ListTugas &list);            // head -> tail
+void tampilkanTugasMundur(const ListTugas &list);      // tail -> head (memanfaatkan pointer prev)
+void tampilkanDetailTugas(const Tugas &t);             // semua field termasuk deskripsi
+ 
+// Dipakai juga oleh Queue / modul lain
+void tampilkanHeaderTugas();
+void tampilkanBarisTugas(const Tugas &t);
+std::string teksPrioritas(int prioritas);
+ 
 #endif
