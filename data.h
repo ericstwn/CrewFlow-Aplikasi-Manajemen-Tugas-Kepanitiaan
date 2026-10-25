@@ -31,6 +31,11 @@ const int PRIORITAS_TINGGI = 1;
 const int PRIORITAS_SEDANG = 2;
 const int PRIORITAS_RENDAH = 3;
 
+    struct Akun {
+        string username;
+        string password;
+    };
+
 // ================================================================
 //  DATA UTAMA : Tugas
 // ================================================================
