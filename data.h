@@ -92,8 +92,8 @@ struct Queue {
 
    struct Aksi {
        JenisAksi jenis;
-       Tugas sebelum;
-       Tugas sesudah;
+       Tugas sebelum;     // kondisi tugas sebelum aksi
+       Tugas sesudah;     // kondisi tugas sesudah aksi
    };
 
    struct NodeStack {
