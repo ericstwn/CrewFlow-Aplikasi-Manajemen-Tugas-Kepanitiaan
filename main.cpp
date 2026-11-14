@@ -2,6 +2,9 @@
 #include "data.h"
 using namespace std;
 
+Akun maksimalDataDaftarAkun[55];
+int jumlahAkunKedaftar = 0;
+
 int main() {
     int menu;
     string username, password;
@@ -34,6 +37,14 @@ int main() {
         cin >> username;
         cout << "Buat Password: ";
         cin >> password;
+
+        if (jumlahAkunKedaftar <= 55)
+        {
+            maksimalDataDaftarAkun[jumlahAkunKedaftar].username;
+            maksimalDataDaftarAkun[jumlahAkunKedaftar].password;
+            jumlahAkunKedaftar++;
+        }
+        
         
     }
     else if (menu == 3)
@@ -46,6 +57,7 @@ int main() {
     }
     cout << endl;
     return 0;
+
 }
 
 
