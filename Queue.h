@@ -5,26 +5,18 @@
 #define QUEUE_H
 
 #include "data.h"
-#include "Tugas.h"
 
-class AntreanTugas {
-private:
-    QueueNode* front;
-    QueueNode* rear;
-    int ukuran;
-
-public:
-    AntreanTugas();
-    ~AntreanTugas();
-
-    bool enqueue(int idTugas);          // false jika sudah ada di antrean
-    bool dequeue(int& idTugas);         // false jika antrean kosong
-    bool peek(int& idTugas) const;
-    bool isEmpty() const;
-    bool sudahAda(int idTugas) const;
-    void hapusId(int idTugas);          // dipakai saat tugas dihapus
-    int  jumlah() const;
-    void tampil(const DaftarTugas& tugas, const DaftarAnggota& anggota) const;
-};
-
+void initQueue(Queue &q);
+bool isEmptyQueue(const Queue &q);
+bool sudahAdaDiQueue(const Queue &q, int idTugas);
+ 
+bool enqueue(Queue &q, const Tugas &data);          // false jika ID tugas sudah ada di antrean
+bool dequeue(Queue &q, Tugas &hasil);               // false jika antrean kosong
+bool peekQueue(const Queue &q, Tugas &hasil);       // lihat terdepan tanpa mengambil
+ 
+bool hapusDariQueue(Queue &q, int idTugas);         // dipakai saat tugas dihapus dari daftar
+bool perbaruiDiQueue(Queue &q, const Tugas &data);  // dipakai saat tugas diedit (salinan di antrean ikut diperbarui)
+void kosongkanQueue(Queue &q);
+void tampilkanQueue(const Queue &q);
+ 
 #endif

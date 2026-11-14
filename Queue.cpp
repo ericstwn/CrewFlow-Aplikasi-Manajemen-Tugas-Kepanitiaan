@@ -2,88 +2,106 @@
 // Queue.cpp  -  Implementasi Queue Antrean Tugas  (AQILAH)
 // ============================================================
 #include "Queue.h"
+#include "Tugas.h"      // untuk fungsi tampilan baris tugas
+#include <iostream>
+#include <iomanip>
+using namespace std;
 
-AntreanTugas::AntreanTugas() : front(nullptr), rear(nullptr), ukuran(0) {}
-
-AntreanTugas::~AntreanTugas() {
-    int dummy;
-    while (dequeue(dummy)) {}
+void initQueue(Queue &q) {
+    q.front = nullptr;
+    q.rear = nullptr;
+    q.jumlah = 0;
 }
 
-bool AntreanTugas::isEmpty() const { return front == nullptr; }
+bool isEmptyQueue(const Queue &q) {
+    return q.front == nullptr;
+}
 
-int AntreanTugas::jumlah() const { return ukuran; }
-
-bool AntreanTugas::sudahAda(int idTugas) const {
-    for (QueueNode* cur = front; cur; cur = cur->next)
-        if (cur->idTugas == idTugas) return true;
+bool sudahAdaDiQueue(const Queue &q, int idTugas) {
+    for (NodeQueue *cur = q.front; cur; cur = cur->next)
+        if (cur->data.id == idTugas) return true;
     return false;
 }
 
 // Masuk dari belakang (rear)
-bool AntreanTugas::enqueue(int idTugas) {
-    if (sudahAda(idTugas)) return false;
+bool enqueue(Queue &q, const Tugas &data) {
+    if (sudahAdaDiQueue(q, data.id)) return false;
 
-    QueueNode* baru = new QueueNode;
-    baru->idTugas = idTugas;
+    NodeQueue *baru = new NodeQueue;
+    baru->data = data;
     baru->next = nullptr;
 
-    if (isEmpty()) front = rear = baru;
+    if (isEmptyQueue(q)) q.front = q.rear = baru;
     else {
-        rear->next = baru;
-        rear = baru;
+        q.rear->next = baru;
+        q.rear = baru;
     }
-    ukuran++;
+    q.jumlah++;
     return true;
 }
 
 // Keluar dari depan (front)
-bool AntreanTugas::dequeue(int& idTugas) {
-    if (isEmpty()) return false;
-    QueueNode* hapus = front;
-    idTugas = hapus->idTugas;
-    front = front->next;
-    if (!front) rear = nullptr;
+bool dequeue(Queue &q, Tugas &hasil) {
+    if (isEmptyQueue(q)) return false;
+
+    NodeQueue *hapus = q.front;
+    hasil = hapus->data;
+    q.front = q.front->next;
+    if (!q.front) q.rear = nullptr;
     delete hapus;
-    ukuran--;
+    q.jumlah--;
     return true;
 }
 
-bool AntreanTugas::peek(int& idTugas) const {
-    if (isEmpty()) return false;
-    idTugas = front->idTugas;
+bool peekQueue(const Queue &q, Tugas &hasil) {
+    if (isEmptyQueue(q)) return false;
+    hasil = q.front->data;
     return true;
 }
 
-// Hapus id tertentu dari tengah antrean (tugas sudah dihapus dari daftar)
-void AntreanTugas::hapusId(int idTugas) {
-    QueueNode* prev = nullptr;
-    QueueNode* cur = front;
-    while (cur && cur->idTugas != idTugas) {
+bool hapusDariQueue(Queue &q, int idTugas) {
+    NodeQueue *prev = nullptr;
+    NodeQueue *cur = q.front;
+    while (cur && cur->data.id != idTugas) {
         prev = cur;
         cur = cur->next;
     }
-    if (!cur) return;
+    if (!cur) return false;
 
-    if (!prev) front = cur->next;
+    if (!prev) q.front = cur->next;
     else       prev->next = cur->next;
-    if (cur == rear) rear = prev;
+    if (cur == q.rear) q.rear = prev;
     delete cur;
-    ukuran--;
+    q.jumlah--;
+    return true;
 }
 
-void AntreanTugas::tampil(const DaftarTugas& tugas, const DaftarAnggota& anggota) const {
-    if (isEmpty()) {
+bool perbaruiDiQueue(Queue &q, const Tugas &data) {
+    for (NodeQueue *cur = q.front; cur; cur = cur->next) {
+        if (cur->data.id == data.id) {
+            cur->data = data;
+            return true;
+        }
+    }
+    return false;
+}
+
+void kosongkanQueue(Queue &q) {
+    Tugas dummy;
+    while (dequeue(q, dummy)) {}
+}
+
+void tampilkanQueue(const Queue &q) {
+    if (isEmptyQueue(q)) {
         cout << "  (Antrean kosong)\n";
         return;
     }
-    cout << "Urutan  ";
-    tampilHeaderTugas();
+    cout << left << setw(8) << "Urutan";
+    tampilkanHeaderTugas();
     int no = 1;
-    for (QueueNode* cur = front; cur; cur = cur->next, no++) {
-        Tugas* t = tugas.cariId(cur->idTugas);
-        cout << left << "#" << no << (no < 10 ? "      " : "     ");
-        if (t) tampilBarisTugas(t, anggota);
-        else   cout << "(tugas ID " << cur->idTugas << " tidak ditemukan)\n";
+    for (NodeQueue *cur = q.front; cur; cur = cur->next, no++) {
+        cout << left << setw(8) << ("#" + to_string(no));
+        tampilkanBarisTugas(cur->data);
     }
+    cout << "Total antrean: " << q.jumlah << " tugas\n";
 }
