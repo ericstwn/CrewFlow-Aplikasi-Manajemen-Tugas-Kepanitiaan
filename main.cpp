@@ -1,9 +1,12 @@
 #include <iostream>
+#include <fstream>
 #include "data.h"
 using namespace std;
 
 Akun maksimalDataDaftarAkun[55];
 int jumlahAkunKedaftar = 0;
+bool loginBerhasil;
+bool usernameSudahAda;
 
 int main() {
     int menu;
@@ -28,36 +31,94 @@ int main() {
         cin >> username;
         cout << "Password: ";
         cin >> password;
-        cout << "\nLogin Berhasil!\n";
+
+        if (jumlahAkunKedaftar == 0)
+        {
+            cout << "Akun tidak ditemukan\n";
+            cout << "Silahkan Daftar Dulu\n";
+        }
+        else
+        {
+            loginBerhasil = false;
+        do
+        {
+        for (int i = 0; i < jumlahAkunKedaftar; i++)
+        {
+            if (maksimalDataDaftarAkun[i].username == username &&
+                maksimalDataDaftarAkun[i].password == password)
+                {
+                loginBerhasil = true;
+                break;
+                }
+            }
+
+            if (loginBerhasil == false)
+            {
+                cout << "Username atau Password Salah\n";
+                cout << "Silakan Coba Lagi\n";
+
+                cout << "Username: ";
+                cin >> username;
+                cout << "Password: ";
+                cin >> password;
+            }
+        } while (loginBerhasil == false);
+            cout << "Login Berhasil!\n";
+            cout << "Welcome to CrewFlow bos, " << username << "\n";
+        }
     }
+
     else if (menu == 2)
     {
         cout << "======= Daftar =======\n";
-        cout << "Buat Username: ";
-        cin >> username;
-        cout << "Buat Password: ";
-        cin >> password;
 
-        if (jumlahAkunKedaftar <= 55)
-        {
-            maksimalDataDaftarAkun[jumlahAkunKedaftar].username;
-            maksimalDataDaftarAkun[jumlahAkunKedaftar].password;
-            jumlahAkunKedaftar++;
-        }
-        
-        
+            if (jumlahAkunKedaftar < 55)
+            {
+                cout << "Buat Username :";
+                cin >> username;
+                usernameSudahAda = false;
+
+                for (int i = 0; i < jumlahAkunKedaftar; i++)
+                {
+                    if (maksimalDataDaftarAkun[i].username == username)
+                    {
+                        usernameSudahAda = true;
+                        break;
+                    }
+                }
+
+                if (usernameSudahAda == true)
+                {
+                    cout << "Username sudah digunakan\n";
+                }
+                else 
+                {
+                    cout << "Buat Password: ";
+                    cin >> password;
+
+                    maksimalDataDaftarAkun[jumlahAkunKedaftar].username = username;
+                    maksimalDataDaftarAkun[jumlahAkunKedaftar].password = password;
+                    jumlahAkunKedaftar++;
+
+                    cout << "Akun berhasil dibuat, Silahkan Login\n";
+                }
+            }
+            else
+            {
+                cout << "Gagal daftar, Kapasitas penuh!\n";
+            }
     }
+
     else if (menu == 3)
     {
         cout << "Terima Kasih Udah Pakai CrewFlow ;)";
     }
+
     else 
     {
         cout << "Pilihan Tidak Valid!";
     }
-    cout << endl;
     return 0;
-
 }
 
 
