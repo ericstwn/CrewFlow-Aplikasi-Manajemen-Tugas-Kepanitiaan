@@ -7,10 +7,46 @@ Akun maksimalDataDaftarAkun[55];
 int jumlahAkunKedaftar = 0;
 bool loginBerhasil;
 bool usernameSudahAda;
+bool simpanAkun (string username, string password)
+{
+    ofstream file("akun.txt", ios::app);
+    if (!file.is_open())
+    {
+        return false;
+    }
+    file << username << "|" << password << endl;
+    file.close();
+
+    if (file.fail())
+    {
+        return false;
+    }
+    return true;
+}
+
+void bacaDataAkun()
+{
+    ifstream file("akun.txt");
+    string username, password;
+
+    if (!file.is_open())
+    {
+        return;
+    }
+
+    while (jumlahAkunKedaftar < 55 && getline(file, username, '|') && getline(file, password))
+    {
+        maksimalDataDaftarAkun[jumlahAkunKedaftar].username = username;
+        maksimalDataDaftarAkun[jumlahAkunKedaftar].password = password;
+        jumlahAkunKedaftar++;
+    }
+    file.close();
+}
 
 int main() {
     int menu;
     string username, password;
+    bacaDataAkun();
 
     cout << "------------------------\n";
     cout << "       CREWFLOW\n";
@@ -89,18 +125,21 @@ int main() {
 
                 if (usernameSudahAda == true)
                 {
-                    cout << "Username sudah digunakan\n";
+                    cout << "Username sudah digunakan!\n";
                 }
                 else 
                 {
                     cout << "Buat Password: ";
                     cin >> password;
 
+                    if (simpanAkun(username, password))
+                    {
                     maksimalDataDaftarAkun[jumlahAkunKedaftar].username = username;
                     maksimalDataDaftarAkun[jumlahAkunKedaftar].password = password;
                     jumlahAkunKedaftar++;
 
                     cout << "Akun berhasil dibuat, Silahkan Login\n";
+                    }
                 }
             }
             else
