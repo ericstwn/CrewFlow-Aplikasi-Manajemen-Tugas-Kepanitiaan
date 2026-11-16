@@ -43,11 +43,81 @@ void bacaDataAkun()
     file.close();
 }
 
-int main() {
+int dashboard(string username)
+    {
+        int menuDashboard;
+        do
+        {
+            cout << "====================\n";
+            cout << "      CREWFLOW\n";
+            cout << "====================\n";
+            cout << "Selamat datang, " << username << "\n";
+            cout << "1. Manajemen Anggota\n";
+            cout << "2. Manajemen Tugas\n";
+            cout << "3. Manajemen Jadwal\n";
+            cout << "4. Antrean Tugas\n";
+            cout << "5. Searching\n";
+            cout << "6. Riwayat Kerja\n";
+            cout << "7. Notifikasi Tugas\n";
+            cout << "8. Logout\n";
+            cout << "9. Exit/Keuar\n";
+            cout << "====================\n";
+            cout << "Pilih Menu: ";
+            cin >> menuDashboard;
+
+            if (menuDashboard == 1)
+            {
+                cout << "\nSubmenu Manajemen Anggota dipilih\n";
+            }
+            else if (menuDashboard == 2)
+            {
+                cout << "\nSubmenu Manajemen Tugas dipilih\n";
+            }
+            else if (menuDashboard == 3)
+            {
+                cout << "\nSubmenu Manajemen Jadwal dipilih\n";
+            }
+            else if (menuDashboard == 4)
+            {
+                cout << "\nSubmenu Antrean Tugas\n";
+            }
+            else if (menuDashboard == 5)
+            {
+                cout << "\nSubmenu Searching\n";
+            }
+            else if (menuDashboard == 6)
+            {
+                cout << "\nSubmenu Riwayat Kerja\n";
+            }
+            else if (menuDashboard == 7)
+            {
+                cout << "\nSubmenu Notifikasi Tugas\n";
+            }
+            else if (menuDashboard == 8)
+            {
+                cout << "\nBerhasil Logout!\n";
+            }
+            else if (menuDashboard == 9)
+            {
+                cout << "\nTerima Kasih Udah Pakai CrewFlow ;)\n";
+                return 0;
+            }
+            else
+            {
+                cout << "\nPilihan tidak valid!\n";
+            }
+        } while (true);
+        return 1;
+    }
+
+int main() 
+{
     int menu;
     string username, password;
     bacaDataAkun();
 
+    do
+    {
     cout << "------------------------\n";
     cout << "       CREWFLOW\n";
     cout << "------------------------\n";
@@ -76,10 +146,10 @@ int main() {
         else
         {
             loginBerhasil = false;
-        do
-        {
-        for (int i = 0; i < jumlahAkunKedaftar; i++)
-        {
+            do
+            {
+            for (int i = 0; i < jumlahAkunKedaftar; i++)
+            {
             if (maksimalDataDaftarAkun[i].username == username &&
                 maksimalDataDaftarAkun[i].password == password)
                 {
@@ -101,6 +171,12 @@ int main() {
         } while (loginBerhasil == false);
             cout << "Login Berhasil!\n";
             cout << "Welcome to CrewFlow bos, " << username << "\n";
+            int hasilDashboard = dashboard(username);
+
+            if (hasilDashboard == 0)
+            {
+                return 0;
+            }
         }
     }
 
@@ -157,8 +233,10 @@ int main() {
     {
         cout << "Pilihan Tidak Valid!";
     }
+}while (menu !=3);
     return 0;
 }
+
 
 
 
